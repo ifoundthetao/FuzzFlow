@@ -22,7 +22,7 @@ function ($scope, $rootScope, $interval, config, JobAPI, CrashAPI, MiscAPI) {
      }
 
      $scope.getStaticURL = function(rel){
-        return "http://" + config.server + '/' + rel;
+        return config.server + '/' + rel;
      }
 
      $scope.getFileName = function(rel){

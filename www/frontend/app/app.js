@@ -1,6 +1,6 @@
 'use strict';
 
-var server_ip = '127.0.0.1;
+SERVER_ENDPOINT = http://127.0.0.1/
 
 
 angular
@@ -10,8 +10,8 @@ angular
 'file-model',
 ])
 .value('config', {
-    server: server_ip,
-    baseURL: "http://" + server_ip + "/api",
+    server: SERVER_ENDPOINT,
+    baseURL: "http://" + SERVER_ENDPOINT + "/api",
     refreshTime: 5000   // Timer to update info from server
 })
 .config(function ($routeProvider) {
