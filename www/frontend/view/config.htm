@@ -139,7 +139,7 @@
                             <span ng-show="!engine.configMode">{{engine.name}}</span>
                             <input type="text" style="width:100%" ng-show="engine.configMode" ng-model="engine.name" ng-value="engine.name" />
                         </td>
-                        <td>
+                        <td nowrap>
                             <span ng-show="!engine.configMode">{{engine.path}}</span>
                             <textarea style="width:100%" ng-show="engine.configMode" ng-model="engine.path" ng-value="engine.path" />
                         </td>
@@ -158,7 +158,7 @@
                             </select>
                         </td>
                         <td style="15%">
-                            <span ng-show="!engine.configMode" ng-repeat="tag in engine.option_tags"  >{{tag.text}},&nbsp;</span>
+				<span ng-show="!engine.configMode" ng-repeat="tag in engine.option_tags"  >{{tag.text}},&nbsp;<br/></span>
                             <tags-input  ng-show="engine.configMode" add-from-autocomplete-only="true" ng-model="engine.option_tags">
                                 <auto-complete min-length="0" load-on-empty="true" source="queryOptionTags($query)"></auto-complete>
                             </tags-input>

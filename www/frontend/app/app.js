@@ -1,6 +1,6 @@
 'use strict';
 
-var server_ip = '172.28.128.3';
+var server_ip = '127.0.0.1;
 
 
 angular

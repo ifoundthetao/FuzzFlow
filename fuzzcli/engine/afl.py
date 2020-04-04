@@ -60,11 +60,17 @@ class Fuzzer():
         self.timer = threading.Timer(5, wrapper1)
         self.timer.start()
 
-        in_dir = self.options['afl_in_dir']
-        out_dir = self.options['afl_out_dir']
+        print "fuzzing with afl engine"
+        in_dir = os.getcwd() + os.sep + self.options['afl_in_dir']
+        print "input directory: " + in_dir
+        out_dir = os.getcwd() + os.sep + self.options['afl_out_dir']
+        print "output directory: " + out_dir
         tout = self.options['afl_timeout']
+        print "timeout: " + tout
+        print os.getcwd() + os.sep + "engine" + os.sep + "afl/afl-fuzz"
         call_args = [
-            self.engine['path'],
+            #self.engine['path'],
+            os.getcwd() + os.sep + "engine" + os.sep + "afl/afl-fuzz",
             '-i',
             in_dir,
             '-o',
@@ -84,3 +90,4 @@ class Fuzzer():
             output = proc.stdout.read()
             self.fail(output)
 
+''

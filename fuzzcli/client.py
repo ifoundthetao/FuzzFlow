@@ -24,6 +24,7 @@ def main():
             helper.update()
             job = Rest.get_job_by_host(host['id'])
             if job is not None:
+                print "Got job: " + job['name']
                 engine, target, options = helper.extract_job(job)
                 engine_name = engine['name']
                 fz = engines[engine_name](job, engine, target, options)

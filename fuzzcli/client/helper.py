@@ -24,7 +24,7 @@ class Helper(object):
     def get_default_ip(self):
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         try:
-            s.connect(('moflow.org', 9))
+            s.connect(('8.8.8.8', 9))
             client = s.getsockname()[0]
         except socket.error:
             client = "0.0.0.0"
@@ -63,10 +63,11 @@ class Helper(object):
         platform_id = self.get_platform_id()
         arch_id = self.get_arch_id()
         mac = self.get_mac()
-        hostname, alias_list, addr_list = socket.gethostbyaddr(self.get_default_ip())
-        ip = addr_list[0]
+        #hostname, alias_list, addr_list = socket.gethostbyaddr(self.get_default_ip())
+        #ip = addr_list[0]
+        ip = self.get_default_ip()
         host_payload = {
-            'name' : hostname,
+            'name' : self.get_default_ip(),
             'mac' : mac,
             'ip' : ip,
             'platform_id': platform_id,
@@ -84,6 +85,7 @@ class Helper(object):
 
 
     def update(self):
+        return
         print "[*] Trying to update the client..."
         try:
             with open("client.zip", "rb") as f:
