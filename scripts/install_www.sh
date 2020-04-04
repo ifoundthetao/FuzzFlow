@@ -1,8 +1,9 @@
 #!/bin/bash
 
-SCRIPT_PATH="$0"
-SCRIPT_DIR="$(dirname \"$SCRIPT_PATH\")"
-FUZZFLOW_DIR="$(dirname \"$SCRIPT_DIR\")"
+set -e
+SCRIPT_PATH=$(realpath "$0")
+SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
+FUZZFLOW_DIR=$(dirname "${SCRIPT_DIR}")
 
 sudo apt-get install -y build-essential python-dev python-pip nginx nginx-extras uwsgi uwsgi-plugin-python
 
