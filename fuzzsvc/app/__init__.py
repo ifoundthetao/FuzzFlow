@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Api
 import config, time, traceback, os, uuid
 
-app = Flask(__name__, static_folder='static', static_url_path='')
+app = Flask(__name__, static_folder='../../www/frontend', static_url_path='/')
 
 logFile = "log-" + time.strftime("%Y-%m-%d-%H.%M.%S") + ".log"
 

@@ -29,8 +29,8 @@ function valid_ip()
 }
 
 
-if [ $# -ne 1 ]; then 
-	echo "usage: $0 ip_address"
+if [ $# -ne 2 ]; then 
+	echo "usage: $0 ip_address port"
 	exit
 fi
 
@@ -38,9 +38,8 @@ valid_ip $1
 if [[ $? -ne 0 ]]; then
 	echo "bad argument"
 	echo
-	echo "usage: $0 ip_address"
+	echo "usage: $0 ip_address port"
 	exit
 fi
 
-sed -i "/SERVER_ENDPOINT = / c SERVER_ENDPOINT = http://$1/" $FUZZFLOW_DIR/fuzzcli/client/config.py
-sed -i "/SERVER_ENDPOINT = / c SERVER_ENDPOINT = http://$1/" $FUZZFLOW_DIR/www/frontend/app/app.js
+sed -i "/SERVER_ENDPOINT = / c SERVER_ENDPOINT = \'http://$1:$2/\'" $FUZZFLOW_DIR/fuzzcli/client/config.py

@@ -1,7 +1,11 @@
 'use strict';
 
-SERVER_ENDPOINT = http://127.0.0.1/
-
+var SERVER_ENDPOINT = '' // override if API server is different from web server 
+if (SERVER_ENDPOINT = '') { 
+	SERVER_ENDPOINT = location.protocol +'//'
+			+ location.hostname 
+			+ (location.port ? ':' + location.port: '') + '/';
+}
 
 angular
 .module('frontApp', [
@@ -10,8 +14,8 @@ angular
 'file-model',
 ])
 .value('config', {
-    server: SERVER_ENDPOINT,
-    baseURL: "http://" + SERVER_ENDPOINT + "/api",
+    server: SERVER_ENDPOINT, 
+    baseURL: SERVER_ENDPOINT + "/api",
     refreshTime: 5000   // Timer to update info from server
 })
 .config(function ($routeProvider) {

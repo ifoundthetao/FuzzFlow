@@ -8,7 +8,7 @@ FUZZFLOW_DIR=$(dirname "${SCRIPT_DIR}")
 sudo apt-get install -y build-essential python-dev python-pip nginx nginx-extras uwsgi uwsgi-plugin-python
 
 cd "$SCRIPT_DIR"
-sed -e "s#FUZZFLOW_WWW#${FUZZFLOW_DIR}/www/frontend#g" fuzzflow_nginx.conf | sudo tee /etc/nginx/sites-available/fuzzflow
+sed -e "s#FUZZFLOW_WWW#${FUZZFLOW_DIR}/www#g" fuzzflow_nginx.conf | sudo tee /etc/nginx/sites-available/fuzzflow
 sudo ln -sf /etc/nginx/sites-available/fuzzflow  /etc/nginx/sites-enabled/fuzzflow
 
 sudo touch /tmp/fuzzflow.sock
