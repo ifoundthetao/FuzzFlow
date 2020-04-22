@@ -17,7 +17,7 @@ db.session.add(FuzzingJobState('Active'))           #DO NOT CHANGE
 db.session.add(FuzzingJobState('Completed'))        #DO NOT CHANGE
 db.session.add(FuzzingJobState('Paused'))           #DO NOT CHANGE
 db.session.add(FuzzingJobState('Failed'))           #DO NOT CHANGE
-#db.session.add(FuzzingJobState('Reserved'))         #DO NOT CHANGE
+db.session.add(FuzzingJobState('Reserved'))         #DO NOT CHANGE
 
 #Fuzzing Option
 field_type = FuzzingOptionType("FIELD")             #DO NOT CHANGE
@@ -31,31 +31,38 @@ db.session.add(checkbox_type)
 
 
 #Platforms
-unknown_plat = FuzzingPlatform('Unknown')
-db.session.add(unknown_plat)
+any_plat = FuzzingPlatform('Any')
+linux_plat = FuzzingPlatform('Linux')
+windows_plat = FuzzingPlatform('Windows')
+macos_plat = FuzzingPlatform('macOS')
+db.session.add(any_plat)
+db.session.add(linux_plat)
+db.session.add(windows_plat)
+db.session.add(macos_plat)
 
 #Architectures
-unknown_arch = FuzzingArch('Unknown')
-db.session.add(unknown_arch)
+any_arch = FuzzingArch('Any')
+x64_arch = FuzzingArch('x86_64')
+db.session.add(any_arch)
+db.session.add(x64_arch)
 
 #Options
-afl_in_dir = FuzzingOption('afl_in_dir', field_type)
-afl_out_dir = FuzzingOption('afl_out_dir', field_type)
-afl_timeout = FuzzingOption('afl_timeout', field_type)
-db.session.add(afl_in_dir)
-db.session.add(afl_out_dir)
-db.session.add(afl_timeout)
-
+input_dir = FuzzingOption('input_dir', field_type)
+timeout = FuzzingOption('timeout', field_type)
+fuzzer_args = FuzzingOption('fuzzer_args', field_type)
+target_args = FuzzingOption('target_args', field_type)
+db.session.add(input_dir)
+db.session.add(timeout)
+db.session.add(fuzzer_args)
+db.session.add(target_args)
 
 #Fuzzing Engines
 db.session.add(
-    FuzzingEngine("afl", "/usr/local/bin/afl-fuzz", unknown_plat, unknown_arch, [afl_out_dir, afl_timeout, afl_in_dir ])
+    FuzzingEngine("afl", "afl-fuzz", linux_plat, x64_arch, [input_dir, timeout, fuzzer_args, target_args])
 )
 
 #Fuzzing Targets
-db.session.add(FuzzingTarget('libpng-1.5.27', "/home/vagrant/libpng-1.5.27/pngtest", unknown_plat, unknown_arch))
-db.session.add(FuzzingTarget('tiff-4.0.6-fake-vulnerable', "/home/vagrant/tiff-4.0.6/tools/tiff2pdf", unknown_plat, unknown_arch))
-
+db.session.add(FuzzingTarget('zipinfo', "/usr/bin/zipinfo", linux_plat, x64_arch))
 
 #Fuzzing Script
 db.session.add(FuzzingScript('test-script',

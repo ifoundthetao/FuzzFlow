@@ -8,12 +8,12 @@ virtualenv .env --always-copy --no-site-packages
 source .env/bin/activate
 pip install -r requirements.txt
 deactivate
-touch /tmp/moflow.sock
-sudo chown www-data:www-data /tmp/moflow.sock
+touch /tmp/fuzzflow.sock
+sudo chown www-data:www-data /tmp/fuzzflow.sock
 sudo rm -rf /etc/nginx/sites-available/default
-sudo cp /vagrant/nginx.conf /etc/nginx/sites-available/moflow
-sudo ln -s /etc/nginx/sites-available/moflow  /etc/nginx/sites-enabled/moflow
-sudo cp /vagrant/uwsgi.ini /etc/uwsgi/apps-available/moflow.ini
-sudo ln -s /etc/uwsgi/apps-available/moflow.ini /etc/uwsgi/apps-enabled/moflow.ini
+sudo cp /vagrant/nginx.conf /etc/nginx/sites-available/fuzzflow
+sudo ln -s /etc/nginx/sites-available/fuzzflow  /etc/nginx/sites-enabled/fuzzflow
+sudo cp /vagrant/uwsgi.ini /etc/uwsgi/apps-available/fuzzflow.ini
+sudo ln -s /etc/uwsgi/apps-available/fuzzflow.ini /etc/uwsgi/apps-enabled/fuzzflow.ini
 sudo service nginx restart
 sudo service uwsgi restart

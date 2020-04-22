@@ -1,4 +1,5 @@
 .env
 *.pyc
 *.log
-fuzzdata
+fuzzdata*
+fuzzcli/fuzzdata*

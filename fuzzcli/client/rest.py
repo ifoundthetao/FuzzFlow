@@ -116,6 +116,8 @@ class Rest(object):
     @staticmethod
     def get_job_by_host(host_id):
         r = Rest.get(['api', 'job', host_id], {'host': 1})
+        print "get_job_by_host"
+        print r
         if r.status_code == 200:
             return r.json()
         else:

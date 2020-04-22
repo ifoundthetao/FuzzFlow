@@ -1,3 +1,4 @@
+from config import SERVER_IP
 import time, socket, hashlib, zipfile, os, sys, shutil, glob, platform, base64, subprocess, tempfile
 from uuid import getnode
 
@@ -24,26 +25,38 @@ class Helper(object):
     def get_default_ip(self):
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         try:
-            s.connect(('8.8.8.8', 9))
+            s.connect((SERVER_IP, 9))
             client = s.getsockname()[0]
         except socket.error:
-            client = "0.0.0.0"
+            client = '0.0.0.0'
         finally:
             del s
         return client
 
     def get_platform_id(self):
         plat_name = platform.system() + ' ' + platform.release()
-
+        plat_name = platform.system()
         plats = Rest.list_platform()
         if plats is not None and len(plats) > 0:
             for p in plats:
                 if p['name'] == plat_name:
                     return p['id']
-
+        
         new_platform = Rest.create_platform(plat_name)
-        return new_platform['id']
 
+        """
+        plat_shortname = platform.system()
+        if plats is not None and len(plats) > 0:
+            found = False
+            for p in plats:
+                if p['name'] == plat_shortname:
+                    found = True
+                    break
+            if found == False:
+                Rest.create_platform(plat_shortname)
+        """
+
+        return new_platform['id']
 
 
     def get_arch_id(self):
@@ -85,8 +98,10 @@ class Helper(object):
 
 
     def update(self):
-        return
         print "[*] Trying to update the client..."
+
+        print "Skipping..."
+        return
         try:
             with open("client.zip", "rb") as f:
                 cli = f.read()

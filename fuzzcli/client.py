@@ -10,18 +10,20 @@ from engine.radamsa import Fuzzer as radamsa
 
 engines = {
     'afl' : afl,
-    'radamsa' : radamsa
+    'radamsa' : radamsa,
+#    'honggfuzz' : honggfuzz
 }
 
 def main():
     helper = Helper()
-    host = helper.register_host()
-    print "\n\nFuzzing Client %s\n" % CLIENT_VERSION
+    print "\n\nFuzzFlow Fuzzing Client %s\n" % CLIENT_VERSION
     while True:
         fz = None
         job = None
         try:
+            host = helper.register_host()
             helper.update()
+            print "Requesting job for host " + host['id']
             job = Rest.get_job_by_host(host['id'])
             if job is not None:
                 print "Got job: " + job['name']
@@ -29,6 +31,8 @@ def main():
                 engine_name = engine['name']
                 fz = engines[engine_name](job, engine, target, options)
                 fz.start()
+                
+            time.sleep(1)
             continue
 
         except socket.error:
@@ -49,8 +53,8 @@ def main():
             try:
                 helper.log_error(message)
             except socket.error:
-                pass
-
+                pass        
+        
 
 if __name__ == "__main__":
     main()

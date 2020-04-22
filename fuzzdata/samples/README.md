@@ -1,1 +1,0 @@
-directories with sample inputs
