@@ -19,6 +19,7 @@ sed -e "s#FUZZFLOW_DIR#${FUZZFLOW_DIR}#g" fuzzflow_uwsgi.ini | sudo tee /etc/uws
 sudo ln -sf /etc/uwsgi/apps-available/fuzzflow.ini /etc/uwsgi/apps-enabled/fuzzflow.ini
 
 sudo chown -R www-data "$FUZZFLOW_DIR/www"
+touch "$FUZZFLOW_DIR/fuzzsvc/app/fuzzflow.db"
 sudo chown www-data "$FUZZFLOW_DIR/fuzzsvc/app/fuzzflow.db"
 
 sudo service nginx restart
