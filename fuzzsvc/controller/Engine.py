@@ -98,7 +98,7 @@ class EngineCtrl(Resource):
     def list(self, offset=0, limit=10000):
         engines = FuzzingEngine.query.offset(offset).limit(limit).all()
         result = [engine.as_dict() for engine in engines]
-        for i in xrange(len(engines)):
+        for i in range(len(engines)):
             result[i]['options'] = engines[i].options
             result[i]['options'] = [option.as_dict() for option in result[i]['options']]
 

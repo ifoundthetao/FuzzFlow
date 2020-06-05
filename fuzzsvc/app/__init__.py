@@ -32,7 +32,7 @@ from model.FuzzingScript import FuzzingScript
 
 db.drop_all()
 db.create_all()
-import seed
+from . import seed
 db.session.commit()
 
 """

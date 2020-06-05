@@ -1,8 +1,8 @@
-from config import SERVER_IP
+from .config import SERVER_IP
 import time, socket, hashlib, zipfile, os, sys, shutil, glob, platform, base64, subprocess, tempfile
 from uuid import getnode
 
-from rest import Rest
+from .rest import Rest
 
 class Helper(object):
     def __init__(self):
@@ -72,7 +72,7 @@ class Helper(object):
         return new_arch['id']
 
     def register_host(self):
-        print "[*] Trying to register the host..."
+        print("[*] Trying to register the host...")
         platform_id = self.get_platform_id()
         arch_id = self.get_arch_id()
         mac = self.get_mac()
@@ -89,7 +89,7 @@ class Helper(object):
 
         self.host = Rest.get_host_by_mac(mac)
         if self.host is not None:
-            print "[!] Host with mac address %s has already been registered." % mac
+            print("[!] Host with mac address %s has already been registered." % mac)
             Rest.update_host(self.host['id'], host_payload)
         else:
             self.host = Rest.create_host(host_payload)
@@ -98,9 +98,9 @@ class Helper(object):
 
 
     def update(self):
-        print "[*] Trying to update the client..."
+        print("[*] Trying to update the client...")
 
-        print "Skipping..."
+        print("Skipping...")
         return
         try:
             with open("client.zip", "rb") as f:
@@ -128,7 +128,7 @@ class Helper(object):
             shutil.rmtree('tmp')
 
             args = sys.argv[:]
-            print "[*] Update installed successfully, restarting...\n"
+            print("[*] Update installed successfully, restarting...\n")
 
             args.insert(0, sys.executable)
             if sys.platform == 'win32':
@@ -138,7 +138,7 @@ class Helper(object):
             sys.exit(1)
 
         else:
-            print "[!] Client is already the latest version."
+            print("[!] Client is already the latest version.")
 
 
     def log_error(self, message):
@@ -214,7 +214,7 @@ class Helper(object):
                 sample
             ]
 
-            print dbg_cmd
+            print(dbg_cmd)
 
             dbg_file = dump_file = None
             proc = subprocess.Popen(dbg_cmd, stdout=subprocess.PIPE)
@@ -238,8 +238,8 @@ class Helper(object):
             if dbg_file is not None:
                 crash_payload['dbg_file'] = dbg_file['upload_path']
 
-            print Rest.create_crash(crash_payload)
+            print(Rest.create_crash(crash_payload))
 
 
         else:
-            print "No Implemented!!!"
+            print("No Implemented!!!")

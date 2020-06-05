@@ -1,6 +1,6 @@
 import requests
 
-from config import SERVER_ENDPOINT
+from .config import SERVER_ENDPOINT
 
 
 class Rest(object):
@@ -42,7 +42,7 @@ class Rest(object):
     def create_log(message):
         payload = {"message": message}
         r = Rest.post(['api', 'log'], payload)
-        print r.json()
+        print(r.json())
 
     @staticmethod
     def list_platform():
@@ -116,8 +116,8 @@ class Rest(object):
     @staticmethod
     def get_job_by_host(host_id):
         r = Rest.get(['api', 'job', host_id], {'host': 1})
-        print "get_job_by_host"
-        print r
+        print("get_job_by_host")
+        print(r)
         if r.status_code == 200:
             return r.json()
         else:

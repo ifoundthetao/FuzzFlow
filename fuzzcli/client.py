@@ -16,17 +16,17 @@ engines = {
 
 def main():
     helper = Helper()
-    print "\n\nFuzzFlow Fuzzing Client %s\n" % CLIENT_VERSION
+    print("\n\nFuzzFlow Fuzzing Client %s\n" % CLIENT_VERSION)
     while True:
         fz = None
         job = None
         try:
             host = helper.register_host()
             helper.update()
-            print "Requesting job for host " + host['id']
+            print("Requesting job for host " + host['id'])
             job = Rest.get_job_by_host(host['id'])
             if job is not None:
-                print "Got job: " + job['name']
+                print("Got job: " + job['name'])
                 engine, target, options = helper.extract_job(job)
                 engine_name = engine['name']
                 fz = engines[engine_name](job, engine, target, options)
@@ -41,13 +41,13 @@ def main():
         except KeyboardInterrupt as e:
             if fz is not None:
                 fz.fail(e.message)
-            print "Execution interrupted. Quitting."
+            print("Execution interrupted. Quitting.")
             sys.exit(0)
 
         except:
-            print "Unhandled Exception\n"
+            print("Unhandled Exception\n")
             traceback.print_exc()
-            print ''
+            print('')
             message = time.strftime("%Y-%m-%d-%H.%M.%S") + ": \n" + \
                       traceback.format_exc()
             try:

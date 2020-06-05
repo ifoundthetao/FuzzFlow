@@ -126,7 +126,7 @@ class JobCtrl(Resource):
     def list(self, offset=0, limit=10000):
         jobs = FuzzingJob.query.offset(offset).limit(limit).all()
         result = [job.as_dict() for job in jobs]
-        for i in xrange(len(jobs)):
+        for i in range(len(jobs)):
             options = FuzzingJobOption.query.filter_by(job_id=jobs[i].id).all()
             result[i]['options'] = [option.as_dict() for option in options]
 
