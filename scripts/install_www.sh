@@ -5,7 +5,7 @@ SCRIPT_PATH=$(realpath "$0")
 SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
 FUZZFLOW_DIR=$(dirname "${SCRIPT_DIR}")
 
-sudo apt-get install -y build-essential python-dev python-pip nginx nginx-extras uwsgi uwsgi-plugin-python
+sudo apt-get install -y build-essential python3-dev python3-pip nginx nginx-extras uwsgi uwsgi-plugin-python3
 
 cd "$SCRIPT_DIR"
 sed -e "s#FUZZFLOW_WWW#${FUZZFLOW_DIR}/www#g" fuzzflow_nginx.conf | sudo tee /etc/nginx/sites-available/fuzzflow
